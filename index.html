@@ -1,0 +1,264 @@
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>脚本资源网</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: "PingFang SC", "微软雅黑", sans-serif;
+         }
+         /* 星空背景 */
+         body {
+             background: #000 url("https://picsum.photos/id/1015/1080/1920") no-repeat center center fixed;
+             background-size: cover;
+             color: #fff;
+             position: relative;
+             overflow-x: hidden;
+         }
+         /* 星空光晕效果 */
+         body::before {
+             content: "";
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.8) 70%);
+             pointer-events: none;
+             z-index: 0;
+         }
+         /* 灰色液态玻璃安全条 */
+         .security-bar {
+             background: rgba(100, 100, 100, 0.3);
+             color: #fff;
+             padding: 8px 15px;
+             text-align: center;
+             font-size: 12px;
+             position: sticky;
+             top: 0;
+             z-index: 100;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.1);
+         }
+         .container {
+             max-width: 100%;
+             min-height: 100vh;
+             background: rgba(0,0,0,0.6);
+             padding: 20px;
+             position: relative;
+             z-index: 1;
+             backdrop-filter: blur(8px);
+         }
+         /* 顶部标题栏 */
+         .header {
+             background: rgba(20,20,40,0.8);
+             padding: 12px 20px;
+             margin: -20px -20px 20px -20px;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             border-bottom: 1px solid rgba(255,255,255,0.1);
+         }
+         .header h1 {
+             font-size: 20px;
+             font-weight: 500;
+         }
+         .header .menu {
+             font-size: 20px;
+         }
+         .avatar {
+             width: 100px;
+             height: 100px;
+             background: rgba(255,255,255,0.1);
+             border-radius: 50%;
+             margin: 20px auto;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.2);
+         }
+         .avatar svg {
+             width: 60px;
+         }
+         h2.title {
+             text-align: center;
+             font-size: 26px;
+             margin-bottom: 20px;
+             font-weight: 600;
+             text-shadow: 0 0 10px rgba(255,255,255,0.3);
+         }
+         .notice {
+             background: rgba(255,255,255,0.1);
+             padding: 15px;
+             border-radius: 12px;
+             margin-bottom: 20px;
+             line-height: 1.7;
+             font-size: 14px;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.1);
+         }
+         .warning {
+             text-align: center;
+             color: #ff4444;
+             margin: 10px 0 20px;
+             font-weight: bold;
+             font-size: 16px;
+             text-shadow: 0 0 8px rgba(255,0,0,0.5);
+         }
+         h2 {
+             font-size: 18px;
+             margin: 25px 0 15px;
+             text-align: center;
+             color: rgba(255,255,255,0.8);
+             font-weight: 500;
+         }
+         .msg {
+             background: rgba(255,255,255,0.1);
+             padding: 15px;
+             border-radius: 15px;
+             margin-bottom: 20px;
+             line-height: 1.7;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.1);
+         }
+         /* 灰色液态玻璃长条链接 */
+         .gray-link {
+             display: block;
+             background: rgba(100, 100, 100, 0.3);
+             color: #fff;
+             padding: 12px 15px;
+             border-radius: 10px;
+             text-decoration: none;
+             text-align: center;
+             margin: 15px 0;
+             font-size: 15px;
+             font-weight: 500;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.1);
+             transition: all 0.3s;
+         }
+         .gray-link:hover {
+             background: rgba(100, 100, 100, 0.4);
+             transform: translateY(-2px);
+         }
+         /* 液态玻璃按钮（无图标） */
+         .item {
+             display: flex;
+             align-items: center;
+             background: rgba(255,255,255,0.1);
+             padding: 15px;
+             border-radius: 12px;
+             margin-bottom: 12px;
+             text-decoration: none;
+             color: #fff;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255,255,255,0.1);
+             transition: all 0.3s;
+         }
+         .item:hover {
+             background: rgba(255,255,255,0.15);
+             transform: translateX(5px);
+         }
+         .item .text {
+             flex: 1;
+             font-size: 16px;
+         }
+         .item .arrow {
+             font-size: 20px;
+             color: rgba(255,255,255,0.6);
+         }
+         hr {
+             border-color: rgba(255,255,255,0.1);
+             margin: 15px 0;
+         }
+     </style>
+ </head>
+ <body>
+     <!-- 灰色液态玻璃安全条 -->
+     <div class="security-bar">
+         ⚠️ 本网站已开启网络攻击拦截与防注入保护，您的访问安全已得到保障
+     </div>
+     <div class="container">
+         <!-- 顶部标题栏 -->
+         <div class="header">
+             <h1>脚本资源网</h1>
+             <div class="menu">⋮</div>
+         </div>
+         <div class="avatar">
+             <svg viewBox="0 0 100 100" width="60">
+                 <path d="M50,10 C70,10 80,30 80,50 C80,70 60,90 50,90 C40,90 20,70 20,50 C20,30 30,10 50,10 Z" fill="#8B4513"/>
+                 <path d="M40,30 Q50,20 60,30" fill="none" stroke="#000" stroke-width="5"/>
+                 <circle cx="45" cy="40" r="5" fill="#000"/>
+                 <circle cx="55" cy="40" r="5" fill="#000"/>
+             </svg>
+         </div>
+         <h2 class="title">脚本资源官网</h2>
+         
+         <div class="notice">
+             内容均来源于网络，本人不提供任何安全保证及责任承担，因使用所产生的一切风险和问题用户自负。<br>
+             本人所发布的一切破解补丁、软件以及解密分析文章和视频仅限用于学习和研究目的，不得将上述内容用于商业或非法用途，否则一切后果请用户自行承担。<br>
+             本人所提供的信息均来自网络，对于其中的版权争议与本人无关，本官网定期更新，只做公益活动，如您有买卖等进行交易行为与本官网无关，都是盗窃者自行售卖进行的非法作为，建议举报
+         </div>
+         <div class="warning">广告内容不要相信❗</div>
+         <!-- 灰色液态玻璃长条链接 -->
+         <a href="https://你的安全公告链接" class="gray-link">🔗 点击查看网络安全防护说明</a>
+         <h2>公益脚本（安卓）</h2>
+         <div class="msg">
+             本次，本官网由我们自己研发，不受限于任何的第三方网页管制，请各位使用放心，无任何威胁手机等攻击性行为，如有问题请及时联系。
+         </div>
+         <h2>作为备用使用（更新了几个，请见谅）</h2>
+         <hr>
+         
+         <a href="#" class="item">
+             <div class="text">拾光碎语（已不能用，待通知）</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="#" class="item">
+             <div class="text">拾光碎语旧防封加插件（已不能用，待通知）</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <hr>
+         
+         <a href="https://pd.qq.com/s/f0gi4a2c0?b=2" class="item">
+             <div class="text">纸鸢/花楹/破晓</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=pypwaaOzPqXfFbDI6QHn864tRyO4fo09j54TtfUPE3cnUUk3S0gumK6QFNixRpal&busi_data=eyJncm91cENvZGUiOiI3NzM5NzgxNzEiLCJ0b2tlbiI6ImNpTUsyelcrdzFOdkE4Q2RFUnJmS1NKTnRLbTlLVm41RXo2WjRHRy9IcEVleDdQNFRqNVJ6eGg2QnF2MXFMS1MiLCJ1aW4iOiIzOTE4NzIzNzEzIn0%3D&data=SAHeX-hnPzir3DecytXCgVl9tICb1j-D56SrJdPPe0uXtEgW7Oe4VyZfscsjk14bIdzrDv_IDrLkYksZxECCTQ&svctype=4&tempid=h5_group_info" class="item">
+             <div class="text">鲸鸣脚本（进群获得）</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://pd.qq.com/s/enaknwsdi?b=2" class="item">
+             <div class="text">烛灵脚本（永久卡密zhuling7986）</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://www.kdocs.cn/l/ctI9X7aQtXvM" class="item">
+             <div class="text">反馈封号较多，点击此方法解决基本封号问题</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://docs.qq.com/aio/DY3ZCSWRSTHhETEpa" class="item">
+             <div class="text">梓零脚本</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://www.123684.com/s/5WFAvd-j1xKv" class="item">
+             <div class="text">千纸鹤</div>
+             <div class="arrow">></div>
+         </a>
+         
+         <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=jtVAbJW5ea5yhWb7%2BvTWmyUrxIBY1mBekdSxBap5Ovvf44zKVpw7gmozcFXN%2BL3m&busi_data=eyJncm91cENvZGUiOiI5MzA0ODEzMjUiLCJ0b2tlbiI6IjUveGh6ZCttYnJid2hlQkRxZGV5dXlJYWdwTmJZODM4cDVPaWVGaWhQNXBlRXFZWEF0TSs3M1U0ejkwK05qRGwiLCJ1aW4iOiIzOTE4NzIzNzEzIn0%3D&data=a6DqT37S7o_SzoXk9e3kOr4oVLomE-fwB_40n_-hCf1mvvKhoGfzdvJ-yCmRKBzoS0YNpH__8KaPdT50gAKS6Q&svctype=4&tempid=h5_group_info" class="item">
+             <div class="text">联系官方</div>
+             <div class="arrow">></div>
+         </a>
+     </div>
+ </body>
+ </html>
