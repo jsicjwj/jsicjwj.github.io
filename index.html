@@ -1,8 +1,8 @@
 <html lang="zh-CN">
  <head>
      <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>脚本资源网</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+     <title>脚本官网 | Script Official</title>
      <style>
          * {
              margin: 0;
@@ -10,28 +10,28 @@
              box-sizing: border-box;
              font-family: "PingFang SC", "微软雅黑", sans-serif;
          }
-         /* 星空背景 */
          body {
-             background: #000 url("https://picsum.photos/id/1015/1080/1920") no-repeat center center fixed;
+             background: #000 url("https://picsum.photos/id/122/1920/1080") no-repeat center center fixed;
              background-size: cover;
              color: #fff;
              position: relative;
              overflow-x: hidden;
              transition: all 0.3s ease;
          }
-         /* 星空光晕效果 */
-         body::before {
-             content: "";
-             position: fixed;
-             top: 0;
-             left: 0;
+         /* 电脑端宽度限制 + 居中 */
+         .container {
+             max-width: 900px;
              width: 100%;
-             height: 100%;
-             background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.8) 70%);
-             pointer-events: none;
-             z-index: 0;
+             min-height: 100vh;
+             background: rgba(0,0,0,0.6);
+             padding: 20px;
+             margin: 0 auto;
+             position: relative;
+             z-index: 1;
+             backdrop-filter: blur(8px);
+             transition: all 0.3s ease;
          }
-         /* 灰色液态玻璃安全条 */
+         /* 安全条 */
          .security-bar {
              background: rgba(100, 100, 100, 0.3);
              color: #fff;
@@ -44,17 +44,7 @@
              backdrop-filter: blur(10px);
              border: 1px solid rgba(255,255,255,0.1);
          }
-         .container {
-             max-width: 100%;
-             min-height: 100vh;
-             background: rgba(0,0,0,0.6);
-             padding: 20px;
-             position: relative;
-             z-index: 1;
-             backdrop-filter: blur(8px);
-             transition: all 0.3s ease;
-         }
-         /* 顶部标题栏 */
+         /* 顶部栏 */
          .header {
              background: rgba(20,20,40,0.8);
              padding: 12px 20px;
@@ -68,12 +58,7 @@
              font-size: 20px;
              font-weight: 500;
          }
-         .header-right {
-             display: flex;
-             align-items: center;
-             gap: 12px;
-         }
-         /* 右上角三点菜单按钮 */
+         /* 菜单按钮 */
          .menu-btn {
              font-size: 20px;
              cursor: pointer;
@@ -89,7 +74,7 @@
          #menuPopup {
              position: fixed;
              top: 60px;
-             right: 20px;
+             right: max(calc(50% - 450px), 20px); /* 电脑端自动对齐 */
              width: 160px;
              background: rgba(20,20,40,0.95);
              border-radius: 12px;
@@ -103,7 +88,6 @@
              background: rgba(255,255,255,0.95);
              border-color: rgba(0,0,0,0.1);
          }
-         /* 菜单项 */
          .menu-item {
              padding: 12px 15px;
              font-size: 14px;
@@ -123,6 +107,7 @@
          body.light-mode .menu-item:hover {
              background: rgba(0,0,0,0.05);
          }
+         /* 头像 */
          .avatar {
              width: 100px;
              height: 100px;
@@ -138,6 +123,7 @@
          .avatar svg {
              width: 60px;
          }
+         /* 标题 */
          h2.title {
              text-align: center;
              font-size: 26px;
@@ -145,7 +131,8 @@
              font-weight: 600;
              text-shadow: 0 0 10px rgba(255,255,255,0.3);
          }
-         .notice {
+         /* 文本模块 */
+         .notice, .msg {
              background: rgba(255,255,255,0.1);
              padding: 15px;
              border-radius: 12px;
@@ -170,16 +157,7 @@
              color: rgba(255,255,255,0.8);
              font-weight: 500;
          }
-         .msg {
-             background: rgba(255,255,255,0.1);
-             padding: 15px;
-             border-radius: 15px;
-             margin-bottom: 20px;
-             line-height: 1.7;
-             backdrop-filter: blur(10px);
-             border: 1px solid rgba(255,255,255,0.1);
-         }
-         /* 灰色液态玻璃长条链接 */
+         /* 链接按钮 */
          .gray-link {
              display: block;
              background: rgba(100, 100, 100, 0.3);
@@ -199,9 +177,10 @@
              background: rgba(100, 100, 100, 0.4);
              transform: translateY(-2px);
          }
-         /* 液态玻璃按钮（无图标） */
+         /* 列表项 */
          .item {
              display: flex;
+             justify-content: space-between;
              align-items: center;
              background: rgba(255,255,255,0.1);
              padding: 15px;
@@ -218,7 +197,6 @@
              transform: translateX(5px);
          }
          .item .text {
-             flex: 1;
              font-size: 16px;
          }
          .item .arrow {
@@ -229,7 +207,7 @@
              border-color: rgba(255,255,255,0.1);
              margin: 15px 0;
          }
-         /* 免责弹窗样式 */
+         /* 免责弹窗 */
          #disclaimer {
              position: fixed;
              top: 0;
@@ -246,7 +224,7 @@
              background: rgba(30,30,50,0.95);
              padding: 25px;
              border-radius: 15px;
-             width: 85%;
+             width: 90%;
              max-width: 400px;
              color: white;
              backdrop-filter: blur(15px);
@@ -276,7 +254,7 @@
          #agreeBtn:hover {
              background: #0056b3;
          }
-         /* 底部版权声明 */
+         /* 底部 */
          .copyright {
              text-align: center;
              padding: 20px;
@@ -285,9 +263,9 @@
              margin-top: 30px;
              border-top: 1px solid rgba(255,255,255,0.1);
          }
-         /* 浅色模式样式 */
+         /* 浅色模式 */
          body.light-mode {
-             background: #f5f5f5 url("https://picsum.photos/id/1015/1080/1920") no-repeat center center fixed;
+             background: #f5f5f5 url("https://picsum.photos/id/122/1920/1080") no-repeat center center fixed;
              background-size: cover;
              color: #222;
          }
@@ -315,7 +293,6 @@
          }
          body.light-mode .warning {
              color: #d32f2f;
-             text-shadow: 0 0 8px rgba(255,0,0,0.3);
          }
          body.light-mode .copyright {
              color: rgba(0,0,0,0.5);
@@ -324,7 +301,6 @@
      </style>
  </head>
  <body>
-     <!-- 首次访问免责弹窗 -->
      <div id="disclaimer">
          <div class="disclaimer-content">
              <h3>⚠️ 免责声明</h3>
@@ -332,19 +308,14 @@
              <button id="agreeBtn">我已阅读并同意</button>
          </div>
      </div>
-     <!-- 灰色液态玻璃安全条 -->
      <div class="security-bar">
          ⚠️ 本网站已开启网络攻击拦截与防注入保护，您的访问安全已得到保障
      </div>
      <div class="container">
-         <!-- 顶部标题栏 -->
          <div class="header">
              <h1>脚本资源网</h1>
-             <div class="header-right">
-                 <div class="menu-btn" id="menuBtn">⋮</div>
-             </div>
+             <div class="menu-btn" id="menuBtn">⋮</div>
          </div>
-         <!-- 弹出菜单 -->
          <div id="menuPopup">
              <div class="menu-item" id="themeSwitch">
                  <span id="themeIcon">🌙</span>
@@ -410,13 +381,11 @@
              <div class="text">千纸鹤</div>
              <div class="arrow">></div>
          </a>
-         <!-- 底部版权 -->
          <div class="copyright">
-             © 2025 脚本资源网 | 仅供学习交流使用
+             © 2025 脚本资源网 | Script Official
          </div>
      </div>
      <script>
-         // 免责弹窗
          const disclaimer = document.getElementById('disclaimer');
          const agreeBtn = document.getElementById('agreeBtn');
          if (localStorage.getItem('disclaimerAgreed')) {
@@ -426,30 +395,25 @@
              disclaimer.style.display = 'none';
              localStorage.setItem('disclaimerAgreed', 'true');
          });
-         // 菜单控制
          const menuBtn = document.getElementById('menuBtn');
          const menuPopup = document.getElementById('menuPopup');
          const themeSwitch = document.getElementById('themeSwitch');
          const themeIcon = document.getElementById('themeIcon');
          const themeText = document.getElementById('themeText');
          const body = document.body;
-         // 初始化主题
          if (localStorage.getItem('theme') === 'light') {
              body.classList.add('light-mode');
              themeIcon.textContent = '☀️';
              themeText.textContent = '深色模式';
          }
-         // 点击三点显示/隐藏
          menuBtn.addEventListener('click', (e) => {
              e.stopPropagation();
              menuPopup.style.display = menuPopup.style.display === 'block' ? 'none' : 'block';
          });
-         // 点击外面关闭
          document.addEventListener('click', () => {
              menuPopup.style.display = 'none';
          });
          menuPopup.addEventListener('click', (e) => e.stopPropagation());
-         // 主题切换
          themeSwitch.addEventListener('click', () => {
              body.classList.toggle('light-mode');
              if (body.classList.contains('light-mode')) {
@@ -462,6 +426,6 @@
                  localStorage.setItem('theme', 'dark');
              }
          });
-     </script>
-  </body>
-  </html>
+         </script>
+         </body>
+         </html>
